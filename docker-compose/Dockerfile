@@ -1,11 +1,4 @@
-
-FROM node:10
- 
-WORKDIR /usr/src/app
-
-COPY ./ ./
-
-# 종속성 다운로드 Redis ... .
-RUN npm install
-
-CMD ["node","server.js"]
+FROM openjdk:11-jre-slim
+ARG JAR_FILE=build/libs/*.jar
+COPY ${JAR_FILE} santa.jar
+ENTRYPOINT ["java","-jar","/santa.jar"]
